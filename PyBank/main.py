@@ -3,6 +3,8 @@ import csv
 #variables 
 totalamount = 0
 monthcount = 0
+firstvalue = 0
+lastvalue = 0
 # Path to collect data from the Resources folder
 budget_csv = os.path.join('budget_data.csv')
 
@@ -11,7 +13,7 @@ budget_csv = os.path.join('budget_data.csv')
 with open(budget_csv, 'r') as csvfile:
     # Split the data on commas
     csvreader = csv.reader(csvfile, delimiter=',')
-    
+
     header = next(csvreader)
 
     # Loop through the data
@@ -20,11 +22,15 @@ with open(budget_csv, 'r') as csvfile:
         #count months 
         monthcount = monthcount + 1 
         totalamount = totalamount + int(row[1])
-        
+        if monthcount == 1:
+            firstvalue = row[1]
+        elif (monthcount + 1) == 87:
+            lastvalue = row[1]
     
     print ("Financial Analysis")
     print ("--------------------------")
     print (f"Total Months: {monthcount}" )
     print (f"Total Amount: {totalamount}")
-
+    print (firstvalue)
+    print (lastvalue)
 
