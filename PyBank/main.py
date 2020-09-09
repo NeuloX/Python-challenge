@@ -18,7 +18,7 @@ budget_csv = os.path.join('budget_data.csv')
 with open(budget_csv, 'r') as csvfile:
     # Split the data on commas
     csvreader = csv.reader(csvfile, delimiter=',')
-
+    #skip the titles
     header = next(csvreader)
 
     # Loop through the data
@@ -32,15 +32,23 @@ with open(budget_csv, 'r') as csvfile:
         getprofit.append(row[1])
         #store dates in array
         getdate.append(row[0])
-
+    #get the changes for each month add to the change variable as array
     for counter in range(len(getprofit)-1):
         change.append(int(getprofit[counter+1]) - int(getprofit[counter]))
     #get changes
     avgchange = sum(change)/(monthcount-1)
     maxchange = max(change)
     minchange = min(change)
-
-    sys.stdout = open("test.txt", "a")
+    #show to terminal
+    print ("Financial Analysis")
+    print ("--------------------------")
+    print (f"Total Months: {monthcount}" )
+    print (f"Total Amount: {totalamount}")
+    print (f"Average  Change: ${round(avgchange,2)}")
+    print (f"Greatest Increase in Profits: ${round(maxchange)}")
+    print (f"Greatest Decrease in Profits: ${round(minchange)}")
+    #save to text file
+    sys.stdout = open("result.txt", "a")
     print ("Financial Analysis")
     print ("--------------------------")
     print (f"Total Months: {monthcount}" )
