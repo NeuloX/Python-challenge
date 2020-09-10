@@ -39,14 +39,22 @@ with open(budget_csv, 'r') as csvfile:
     avgchange = sum(change)/(monthcount-1)
     maxchange = max(change)
     minchange = min(change)
+    #get date of changes cross reference the date index to the change index
+    for datecount in range(len(getdate)-1):
+        #look for the index of greatest increase in change
+        if maxchange == change[datecount]:
+            maxdate = getdate[datecount+1]
+        #look fot the index of greates decrease in change
+        if minchange == change[datecount]:
+            mindate = getdate[datecount+1]
     #show to terminal
     print ("Financial Analysis")
     print ("--------------------------")
     print (f"Total Months: {monthcount}" )
     print (f"Total Amount: {totalamount}")
     print (f"Average  Change: ${round(avgchange,2)}")
-    print (f"Greatest Increase in Profits: ${round(maxchange)}")
-    print (f"Greatest Decrease in Profits: ${round(minchange)}")
+    print (f"Greatest Increase in Profits: {maxdate} ${round(maxchange)}")
+    print (f"Greatest Decrease in Profits: {mindate} ${round(minchange)}")
     #save to text file
     sys.stdout = open("result.txt", "a")
     print ("Financial Analysis")
@@ -54,6 +62,6 @@ with open(budget_csv, 'r') as csvfile:
     print (f"Total Months: {monthcount}" )
     print (f"Total Amount: {totalamount}")
     print (f"Average  Change: ${round(avgchange,2)}")
-    print (f"Greatest Increase in Profits: ${round(maxchange)}")
-    print (f"Greatest Decrease in Profits: ${round(minchange)}")
+    print (f"Greatest Increase in Profits: {maxdate} ${round(maxchange)}")
+    print (f"Greatest Decrease in Profits: {mindate} ${round(minchange)}")
     sys.stdout.close
